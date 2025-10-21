@@ -103,93 +103,13 @@
         right: 10px;
         top: 50%;
         transform: translateY(-50%);
-        font-size: 0.8rem;
-      }
-
-      /* Admin Panel Floating at Bottom */
-      #adminPanel {
-        position: absolute;
-        bottom: -250px; /* hidden initially */
-        left: 0;
-        width: 100%;
-        max-width: 380px; /* match container width */
-        padding: 1.5rem;
-        background: linear-gradient(145deg, #2b2b2b, #1f1f1f);
-        border-radius: 15px 15px 0 0;
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        z-index: 100;
-        box-shadow: 0 -10px 25px rgba(0, 0, 0, 0.6);
-        transition: bottom 0.4s ease-in-out;
-      }
-
-      #adminPanel.show {
-        bottom: 0;
-      }
-
-      #adminPanel button {
-        padding: 10px;
-        border-radius: 10px;
-        border: none;
-        background: linear-gradient(to right, #4facfe, #00f2fe);
-        color: #fff;
-        font-weight: bold;
-        cursor: pointer;
-        transition: transform 0.2s, box-shadow 0.2s;
-      }
-
-      #adminPanel button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
-      }
-
-      /* Stream Uptime Display */
-      #uptime {
-        color: #fff;
-        font-weight: bold;
-        font-size: 1.1rem;
-        text-align: center;
-      }
-
-      /* Admin Login Button Styling */
-      .admin-btn {
-        margin-bottom: 10px;
-        padding: 10px 15px;
-        border-radius: 10px;
-        border: none;
-        background: linear-gradient(to right, #4facfe, #00f2fe);
-        color: #fff;
-        font-weight: bold;
-        cursor: pointer;
-        width: 100%;
-        transition: transform 0.2s;
-      }
-
-      .admin-btn:hover {
-        transform: translateY(-2px);
-      }
-
-      @media (max-width: 400px) {
-        .container {
-          width: 90%;
-        }
-        #adminPanel {
-          max-width: 90%;
+        font-size: 0.8rem
         }
       }
     </style>
   </head>
   <body>
-    <!-- Admin Panel Floating at Bottom -->
-    <div id="adminPanel">
-      <button onclick="toggleLiveAdmin()">LIVE NOW Button</button>
-      <div id="uptime">Stream Uptime: 00:00:00</div>
-    </div>
-
     <div class="container" id="mainContainer">
-      <!-- Admin Button -->
-      <button class="admin-btn" onclick="showAdminPanel()">ADMIN</button>
 
       <img
         class="profile-img"
@@ -210,7 +130,6 @@
           src="https://img.icons8.com/ios-filled/50/ffffff/twitch.png"
         />
         Alfie's Twitch
-        <button class="live-btn" id="goLiveBtn">LIVE NOW</button>
       </a>
 
       <a
@@ -269,56 +188,6 @@
         Alfie's Instagram
       </a>
     </div>
-
-    <script>
-      const adminPass = "251109";
-      const adminPanel = document.getElementById("adminPanel");
-      const goLiveBtn = document.getElementById("goLiveBtn");
-      const uptimeEl = document.getElementById("uptime");
-      let uptimeInterval = null;
-      let uptimeSeconds = 0;
-
-      function showAdminPanel() {
-        const pwd = prompt("Enter Admin Password:");
-        if (pwd === adminPass) {
-          adminPanel.classList.add("show");
-        } else {
-          alert("Incorrect Password");
-        }
-      }
-
-      function toggleLiveAdmin() {
-        // toggle LIVE NOW badge
-        if (
-          goLiveBtn.style.display === "none" ||
-          goLiveBtn.style.display === ""
-        ) {
-          goLiveBtn.style.display = "inline-block";
-        } else {
-          goLiveBtn.style.display = "none";
-        }
-
-        // reset uptime
-        clearInterval(uptimeInterval);
-        uptimeSeconds = 0;
-        updateUptimeDisplay();
-
-        // start counting
-        uptimeInterval = setInterval(() => {
-          uptimeSeconds++;
-          updateUptimeDisplay();
-        }, 1000);
-      }
-
-      function updateUptimeDisplay() {
-        const hrs = String(Math.floor(uptimeSeconds / 3600)).padStart(2, "0");
-        const mins = String(Math.floor((uptimeSeconds % 3600) / 60)).padStart(
-          2,
-          "0"
-        );
-        const secs = String(uptimeSeconds % 60).padStart(2, "0");
-        uptimeEl.textContent = `Stream Uptime: ${hrs}:${mins}:${secs}`;
-      }
     </script>
   </body>
 </html>
