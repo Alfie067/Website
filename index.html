@@ -2,191 +2,494 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Alfie Social Media:</title>
+    <meta name="viewport" content="width=1920, initial-scale=1.0" />
+    <title>Alfredo2881</title>
+    <script
+      src="https://kit.fontawesome.com/a076d05399.js"
+      crossorigin="anonymous"
+    ></script>
     <style>
-      body {
+      /* Global Styles */
+      * {
         margin: 0;
-        font-family: Arial, sans-serif;
-        background: linear-gradient(to right, #111, #222);
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Roboto", sans-serif;
+      }
+      body {
+        background: #000;
+        color: #fff;
+        overflow: hidden;
+      }
+      header {
+        position: fixed;
+        top: 0;
+        width: 100%;
         display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 50px;
+        background: rgba(255, 255, 255, 0.1);
+        border-bottom: 1px solid #fff;
+        z-index: 100;
+      }
+      header h1 {
+        font-size: 48px;
+        color: #fff;
+      }
+      nav a {
+        margin-left: 40px;
+        text-decoration: none;
+        color: #fff;
+        font-size: 24px;
+        position: relative;
+        transition: 0.3s;
+        cursor: pointer;
+      }
+      nav a::after {
+        content: "";
+        display: block;
+        height: 2px;
+        width: 0;
+        background: #fff;
+        transition: 0.3s;
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+      }
+      nav a:hover::after {
+        width: 100%;
+      }
+      section {
+        width: 100vw;
+        height: 100vh;
+        display: none;
         justify-content: center;
         align-items: center;
-        min-height: 100vh;
-        position: relative;
-      }
-
-      .container {
-        background: #1e1e1e;
-        border-radius: 20px;
-        padding: 2rem;
-        width: 380px;
         text-align: center;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-        position: relative;
+        flex-direction: column;
+        padding: 150px 100px 100px 100px;
       }
-
-      .profile-img {
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-        object-fit: cover;
-        margin-bottom: 1rem;
-        border: 3px solid #888;
+      section.active {
+        display: flex;
       }
-
-      h1 {
-        margin: 0;
-        font-size: 2rem;
-        color: #fff;
+      h2 {
+        font-size: 60px;
+        margin-bottom: 20px;
       }
       p {
-        color: #ccc;
-        margin-bottom: 1.5rem;
+        font-size: 24px;
+        margin-bottom: 30px;
       }
-
-      .link {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        margin: 0.5rem 0;
-        padding: 10px;
-        border-radius: 10px;
-        color: #fff;
-        text-decoration: none;
-        font-weight: bold;
-        transition: transform 0.2s;
-        width: 100%;
-        position: relative;
-      }
-
-      .link:hover {
-        transform: scale(1.05);
-      }
-
-      .icon {
-        width: 24px;
-        height: 24px;
-      }
-
-      /* Brand Colors */
-      .twitch {
-        background: #9146ff;
-      }
-      .youtube {
-        background: #ff0000;
-      }
-      .discord {
-        background: #5865f2;
-      }
-      .x {
-        background: #1da1f2;
-      }
-      .tiktok {
-        background: #ff0050;
-      }
-      .instagram {
-        background: #e4405f;
-      }
-
-      .live-btn {
-        background: #ff0000;
-        color: #fff;
-        padding: 4px 8px;
-        border-radius: 8px;
+      .cta-button {
+        padding: 20px 50px;
+        font-size: 28px;
+        color: #000;
+        background: #fff;
         border: none;
+        border-radius: 10px;
         cursor: pointer;
-        display: none;
-        font-weight: bold;
+        text-decoration: none;
+        transition: 0.3s;
+      }
+      .cta-button:hover {
+        background: #222;
+        color: #fff;
+      }
+      footer {
+        padding: 20px 50px;
+        text-align: center;
+        background: rgba(255, 255, 255, 0.1);
+        font-size: 20px;
         position: absolute;
-        right: 10px;
-        top: 50%;
-        transform: translateY(-50%);
-        font-size: 0.8rem
+        bottom: 0;
+        width: 100%;
+      }
+
+      /* Community Section */
+      .community {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        width: 100%;
+      }
+      .post-card {
+        background: #111;
+        border: 1px solid #fff;
+        border-radius: 15px;
+        padding: 20px;
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+      .post-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 0 20px #fff;
+      }
+      .post-card h3 {
+        font-size: 28px;
+        margin-bottom: 10px;
+      }
+      .post-card p {
+        font-size: 20px;
+        color: #ccc;
+      }
+      .discord-widget {
+        margin-top: 50px;
+        text-align: center;
+      }
+      .discord-widget h2 {
+        font-size: 32px;
+        margin-bottom: 20px;
+      }
+      .discord-widget iframe {
+        border-radius: 15px;
+        border: 1px solid #fff;
+        width: 600px;
+        height: 700px;
+        max-width: 90%;
+      }
+
+      /* Socials Section */
+      .socials-container {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 40px;
+        margin-top: 50px;
+      }
+      .social-box {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 200px;
+        height: 200px;
+        border: 2px solid #fff;
+        border-radius: 20px;
+        transition: transform 0.3s, background 0.3s;
+        cursor: pointer;
+        text-decoration: none;
+        color: #fff;
+        font-size: 24px;
+      }
+      .social-box i {
+        font-size: 48px;
+        margin-bottom: 15px;
+      }
+      .social-box:hover {
+        transform: translateY(-10px);
+        background: #111;
+        border-color: #fff;
+      }
+
+      /* VODs Section */
+      .vods-container {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 40px;
+        margin-top: 50px;
+      }
+      .vod-box {
+        width: 360px;
+        border: 2px solid #fff;
+        border-radius: 20px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.3s, background 0.3s;
+      }
+      .vod-box:hover {
+        transform: translateY(-10px);
+        border-color: #fff;
+      }
+      .vod-title {
+        background: #111;
+        color: #fff;
+        font-size: 24px;
+        padding: 10px;
+        text-align: center;
+        border-bottom: 1px solid #fff;
+      }
+      .vod-content {
+        position: relative;
+        padding-top: 177.77%;
+        overflow: hidden;
+      } /* 16:9 */
+      .vod-content iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+
+      /* Responsive */
+      @media (max-width: 1920px) {
+        .community {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .social-box,
+        .vod-box {
+          width: 180px;
+        }
+        .vod-box {
+          height: auto;
+        }
+      }
+      @media (max-width: 1200px) {
+        .community {
+          grid-template-columns: 1fr;
         }
       }
     </style>
   </head>
   <body>
-    <div class="container" id="mainContainer">
-
-      <img
-        class="profile-img"
-        src="https://avatars.githubusercontent.com/u/139884896?v=4"
-        alt="Alfredo2881 Profile"
-      />
+    <header>
       <h1>Alfredo2881</h1>
-      <p>15 Year Old • Twitch Streamer • UK</p>#
-      
-      <a
-        href="https://www.twitch.tv/alfredo2881"
-        target="_blank"
-        class="link twitch"
-      >
-        <img
-          class="icon"
-          src="https://img.icons8.com/ios-filled/50/ffffff/twitch.png"
-        />
-        Alfie's Twitch
-      </a>
+      <nav>
+        <a onclick="showSection('home')">Home</a>
+        <a onclick="showSection('socials')">Socials</a>
+        <a onclick="showSection('vods')">VODs</a>
+        <a onclick="showSection('community')">Community</a>
+      </nav>
+    </header>
 
-      <a
-        href="https://www.youtube.com/@AAlfredo2881"
-        target="_blank"
-        class="link youtube"
+    <section id="home" class="active" style="background: #111">
+      <h2>Welcome to Alfredo2881</h2>
+      <p>15 Year Old • Twitch Streamer • UK</p>
+      <a class="cta-button" onclick="showSection('community')"
+        >Join the Community</a
       >
-        <img
-          class="icon"
-          src="https://img.icons8.com/ios-filled/50/ffffff/youtube-play.png"
-        />
-        Alfie's YouTube
-      </a>
+    </section>
 
-      <a
-        href="https://discord.gg/JvxHsGTYZt"
-        target="_blank"
-        class="link discord"
-      >
-        <img
-          class="icon"
-          src="https://img.icons8.com/ios-filled/50/ffffff/discord-logo.png"
-        />
-        Alfie's Discord
-      </a>
+    <section id="socials" style="background: #222">
+      <h2>Social Media Links</h2>
+      <p>You can find all of Alfie's Social Medias!</p>
+      <p></p>
+      <div class="socials-container">
+        <a href="https://x.com/Alfredo2881_" target="_blank" class="social-box"
+          ><i class="fab fa-twitter"></i>Twitter/X</a
+        >
+        <a
+          href="https://www.twitch.tv/alfredo2881"
+          target="_blank"
+          class="social-box"
+          ><i class="fab fa-twitch"></i>Twitch</a
+        >
+        <a
+          href="https://www.tiktok.com/@alfu2010?lang=en-GB"
+          target="_blank"
+          class="social-box"
+          ><i class="fab fa-tiktok"></i>TikTok</a
+        >
+      </div>
+    </section>
+    <section id="vods" style="background: #111">
+      <h2>VODs & Highlights</h2>
+      <p>This is where you can see all Alfie's Latest Videos!</p>
+      <p>COMING SOON!</p>
+      <p></p>
+      <p></p>
+      <div class="vods-container">
+        <div class="vod-box">
+          <div class="vod-title">Latest Video</div>
+          <div class="vod-content">
+            <iframe
+              src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+        <div class="vod-box">
+          <div class="vod-title">Latest Video</div>
+          <div class="vod-content">
+            <iframe
+              src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+        <div class="vod-box">
+          <div class="vod-title">Latest TikTok Video</div>
+          <div class="vod-content">
+            <iframe
+              src="https://www.tiktok.com/embed/7192631083844860422"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+        <div class="vod-box">
+          <div class="vod-title">Latest TikTok Video</div>
+          <div class="vod-content">
+            <iframe
+              src="https://www.tiktok.com/embed/7192631083844860422"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
 
-      <a href="https://x.com/Alfredo2881_" target="_blank" class="link x">
-        <img
-          class="icon"
-          src="https://img.icons8.com/ios-filled/50/ffffff/twitter.png"
-        />
-       Alfie's Twitter/X
-      </a>
+    <section id="community" style="background: #222">
+      <h2 style="text-align: center; margin-bottom: 30px">Community Posts</h2>
+      <div class="community" id="community-posts"></div>
 
-      <a
-        href="https://www.tiktok.com/@alfu2010"
-        target="_blank"
-        class="link tiktok"
-      >
-        <img
-          class="icon"
-          src="https://img.icons8.com/ios-filled/50/ffffff/tiktok--v1.png"
-        />
-        Alfie's TikTok
-      </a>
+      <div class="discord-widget">
+        <h2>Join our Discord</h2>
+        <iframe
+          src="https://discord.com/widget?id=1002961945760112770&theme=dark"
+          allowtransparency="true"
+          frameborder="0"
+          sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
+        >
+        </iframe>
+      </div>
+    </section>
 
-      <a
-        href="https://www.instagram.com/alfredo2881_/"
-        target="_blank"
-        class="link instagram"
-      >
-        <img
-          class="icon"
-          src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png"
-        />
-        Alfie's Instagram
-      </a>
-    </div>
+    <footer>&copy; 2025 Alfredo2881 | All Rights Reserved</footer>
+
+    <script>
+      function showSection(id) {
+        document
+          .querySelectorAll("section")
+          .forEach((s) => s.classList.remove("active"));
+        document.getElementById(id).classList.add("active");
+      }
+
+      // Dynamic community posts with poll
+      const posts = [
+        {
+          title: "New Game Release!",
+          content:
+            "Check out the latest game we are streaming this week. This weeks game is: FORTNITE",
+        },
+        {
+          title: "Weekly Highlights",
+          content: "Top clips from our community players this week.",
+        },
+        {
+          title: "(COMING SOON) Tournament Announced",
+          content: "Join our weekend tournament and win prizes!",
+        },
+        {
+          title: "Community Polls",
+          content: "Vote for the next game we'll stream live.",
+          poll: {
+            question: "Which game should we stream next?",
+            options: ["Fortnite", "FiveM", "Minecraft"],
+            votes: [0, 0, 0],
+            storageKey: "community_poll_vote", // localStorage key
+          },
+        },
+        {
+          title: "Streamer Tips",
+          content: "Learn how Alfredo2881 sets up his stream for success.",
+        },
+        {
+          title: "(COMING SOON) Giveaway Time!",
+          content: "Exclusive merch giveaway for our community members.",
+        },
+      ];
+
+      const container = document.getElementById("community-posts");
+
+      posts.forEach((post) => {
+        const card = document.createElement("div");
+        card.classList.add("post-card");
+
+        // Title
+        const title = document.createElement("h3");
+        title.textContent = post.title;
+        card.appendChild(title);
+
+        // Content
+        const content = document.createElement("p");
+        content.textContent = post.content;
+        card.appendChild(content);
+
+        // Poll
+        if (post.poll) {
+          const pollDiv = document.createElement("div");
+          pollDiv.style.marginTop = "15px";
+
+          const question = document.createElement("p");
+          question.textContent = post.poll.question;
+          question.style.fontWeight = "bold";
+          pollDiv.appendChild(question);
+
+          const resultsDiv = document.createElement("div");
+          resultsDiv.classList.add("poll-results");
+          resultsDiv.style.marginTop = "10px";
+          pollDiv.appendChild(resultsDiv);
+
+          // Check if user already voted
+          const savedVote = localStorage.getItem(post.poll.storageKey);
+
+          post.poll.options.forEach((option, i) => {
+            const btn = document.createElement("button");
+            btn.textContent = option;
+            btn.style.marginRight = "10px";
+            btn.style.marginTop = "5px";
+            btn.style.padding = "8px 12px";
+            btn.style.border = "1px solid #fff";
+            btn.style.background = "#111";
+            btn.style.color = "#fff";
+            btn.style.cursor = "pointer";
+            btn.style.borderRadius = "5px";
+
+            // Disable button if already voted
+            if (savedVote !== null) {
+              btn.disabled = true;
+              btn.style.opacity = "0.5";
+              btn.style.cursor = "default";
+            }
+
+            btn.addEventListener("click", () => {
+              if (localStorage.getItem(post.poll.storageKey) === null) {
+                post.poll.votes[i]++;
+                localStorage.setItem(post.poll.storageKey, i); // save vote
+                updatePollResults(resultsDiv, post.poll);
+                // Disable all buttons
+                pollDiv.querySelectorAll("button").forEach((b) => {
+                  b.disabled = true;
+                  b.style.opacity = "0.5";
+                  b.style.cursor = "default";
+                });
+              }
+            });
+
+            pollDiv.appendChild(btn);
+          });
+
+          // Show results if user already voted
+          if (savedVote !== null) {
+            // Add the saved vote to the poll counts for display
+            const voteIndex = parseInt(savedVote, 10);
+            post.poll.votes[voteIndex]++;
+            updatePollResults(resultsDiv, post.poll);
+          }
+
+          card.appendChild(pollDiv);
+        }
+
+        container.appendChild(card);
+      });
+
+      // Function to update poll results
+      function updatePollResults(resultsDiv, poll) {
+        resultsDiv.innerHTML = "";
+        const totalVotes = poll.votes.reduce((a, b) => a + b, 0);
+        poll.options.forEach((option, i) => {
+          const percent =
+            totalVotes === 0
+              ? 0
+              : Math.round((poll.votes[i] / totalVotes) * 100);
+          const resultLine = document.createElement("p");
+          resultLine.textContent = `${option}: ${poll.votes[i]} vote(s) (${percent}%)`;
+          resultsDiv.appendChild(resultLine);
+        });
+      }
     </script>
   </body>
 </html>
