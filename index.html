@@ -8,7 +8,14 @@
       src="https://kit.fontawesome.com/a076d05399.js"
       crossorigin="anonymous"
     ></script>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-analytics-compat.js"></script>
+
     <style>
+      /* --- BASIC STYLES --- */
       * {
         margin: 0;
         padding: 0;
@@ -59,19 +66,23 @@
       nav a:hover::after {
         width: 100%;
       }
+
+      /* --- SECTIONS CENTERED --- */
       section {
         width: 100vw;
         height: 100vh;
         display: none;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
+        justify-content: center; /* horizontal centering */
+        align-items: center; /* vertical centering */
+        text-align: center; /* text centered */
         flex-direction: column;
         padding: 150px 100px 100px 100px;
+        overflow-y: auto;
       }
       section.active {
         display: flex;
       }
+
       h2 {
         font-size: 60px;
         margin-bottom: 20px;
@@ -105,30 +116,42 @@
         width: 100%;
       }
 
+      /* --- COMMUNITY --- */
       .community {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 30px;
         width: 100%;
       }
-      .post-card {
+      .post-card,
+      .vod-card {
         background: #111;
         border: 1px solid #fff;
         border-radius: 15px;
         padding: 20px;
         transition: transform 0.3s, box-shadow 0.3s;
+        text-align: center;
       }
-      .post-card:hover {
+      .post-card:hover,
+      .vod-card:hover {
         transform: translateY(-10px);
         box-shadow: 0 0 20px #fff;
       }
-      .post-card h3 {
+      .post-card h3,
+      .vod-card h3 {
         font-size: 28px;
         margin-bottom: 10px;
       }
       .post-card p {
         font-size: 20px;
         color: #ccc;
+      }
+      .vod-card iframe {
+        border-radius: 10px;
+        border: 1px solid #fff;
+        width: 100%;
+        max-width: 480px;
+        height: 270px;
       }
 
       .discord-widget {
@@ -147,6 +170,7 @@
         max-width: 90%;
       }
 
+      /* --- SOCIAL BOXES --- */
       .socials-container {
         display: flex;
         justify-content: center;
@@ -163,7 +187,8 @@
         height: 200px;
         border: 2px solid #fff;
         border-radius: 20px;
-        transition: transform 0.3s, background 0.3s;
+        transition: transform 0.3s, background 0.3s, border-color 0.3s,
+          box-shadow 0.3s;
         cursor: pointer;
         text-decoration: none;
         color: #fff;
@@ -173,32 +198,120 @@
         font-size: 48px;
         margin-bottom: 15px;
       }
-      .social-box:hover {
-        transform: translateY(-10px);
-        background: #111;
-        border-color: #fff;
+      .social-box.twitter {
+        border-color: #1da1f2;
+        color: #1da1f2;
+      }
+      .social-box.twitter:hover {
+        background: #1da1f2;
+        color: #fff;
+        box-shadow: 0 0 20px #1da1f2;
+      }
+      .social-box.twitch {
+        border-color: #9146ff;
+        color: #9146ff;
+      }
+      .social-box.twitch:hover {
+        background: #9146ff;
+        color: #fff;
+        box-shadow: 0 0 20px #9146ff;
+      }
+      .social-box.tiktok {
+        border-color: #ff0050;
+        color: #ff0050;
+      }
+      .social-box.tiktok:hover {
+        background: #ff0050;
+        color: #fff;
+        box-shadow: 0 0 20px #ff0050;
+      }
+      .social-box.youtube {
+        border-color: #ff0000;
+        color: #ff0000;
+      }
+      .social-box.youtube:hover {
+        background: #ff0000;
+        color: #fff;
+        box-shadow: 0 0 20px #ff0000;
+      }
+      .social-box.kick {
+        border-color: #53fc18;
+        color: #53fc18;
+      }
+      .social-box.kick:hover {
+        background: #53fc18;
+        color: #000;
+        box-shadow: 0 0 20px #53fc18;
       }
 
+      /* --- SCHEDULE --- */
       .schedule-container {
         display: flex;
         justify-content: center;
         flex-wrap: wrap;
-        gap: 30px;
+        gap: 40px;
         margin-top: 50px;
       }
       .schedule-box {
         background: #111;
-        border: 2px solid #fff;
-        border-radius: 15px;
-        padding: 30px 20px;
-        width: 200px;
+        border: 3px solid #fff;
+        border-radius: 20px;
+        padding: 40px 30px;
+        width: 260px;
+        height: 220px;
         text-align: center;
-        transition: transform 0.3s, box-shadow 0.3s;
-        font-size: 20px;
+        transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+        font-size: 22px;
+        font-weight: bold;
       }
       .schedule-box:hover {
         transform: translateY(-10px);
-        box-shadow: 0 0 20px #fff;
+        box-shadow: 0 0 25px #fff;
+      }
+      .schedule-box:nth-child(1) {
+        border-color: #ff0000;
+        color: #ff0000;
+      }
+      .schedule-box:nth-child(1):hover {
+        background: #ff0000;
+        color: #fff;
+        box-shadow: 0 0 25px #ff0000;
+      }
+      .schedule-box:nth-child(2) {
+        border-color: #ff7f00;
+        color: #ff7f00;
+      }
+      .schedule-box:nth-child(2):hover {
+        background: #ff7f00;
+        color: #fff;
+        box-shadow: 0 0 25px #ff7f00;
+      }
+      .schedule-box:nth-child(3) {
+        border-color: #ffff00;
+        color: #ffff00;
+      }
+      .schedule-box:nth-child(3):hover {
+        background: #ffff00;
+        color: #000;
+        box-shadow: 0 0 25px #ffff00;
+      }
+      .schedule-box:nth-child(4) {
+        border-color: #00ff00;
+        color: #00ff00;
+      }
+      .schedule-box:nth-child(4):hover {
+        background: #00ff00;
+        color: #000;
+        box-shadow: 0 0 25px #00ff00;
+      }
+      .schedule-box:nth-child(5) {
+        border-color: #0000ff;
+        color: #0000ff;
+      }
+      .schedule-box:nth-child(5):hover {
+        background: #0000ff;
+        color: #fff;
+        box-shadow: 0 0 25px #0000ff;
       }
 
       @media (max-width: 1920px) {
@@ -220,7 +333,7 @@
         <a onclick="showSection('home')">Home</a>
         <a onclick="showSection('schedule')">Schedule</a>
         <a onclick="showSection('socials')">Socials</a>
-        <a onclick="showSection('vods')">VODs</a>
+        <a onclick="showSection('vods')">Clips & VODs</a>
         <a onclick="showSection('community')">Community</a>
       </nav>
     </header>
@@ -229,9 +342,13 @@
     <section id="home" class="active" style="background: #111">
       <h2>Welcome to Alfredo2881</h2>
       <p>15 Year Old • Twitch Streamer • UK</p>
-      <p>NEW UPDATE 2.0-- NEW SCHEDULE SECTION!</p>
+      <p>
+        NEW UPDATE 2.1-- New Twitch Clips- "Clips & VODs"- New Text Borders
+        "Schedule & Socials"
+      </p>
+      <p>!!If On Browser: 50% -- App SOON?!!</p>
       <a class="cta-button" onclick="showSection('community')"
-        >Join the Community</a
+        >Join The Community</a
       >
     </section>
 
@@ -242,19 +359,22 @@
       <p>Week of- 10/11/25 - 16/11/25</p>
       <div class="schedule-container">
         <div class="schedule-box">
-          <strong>Monday 10 Nov</strong><br />730PM - 930PM Game: Fortnite
+          <strong>Monday 10 Nov</strong><br />7:30PM - 9:30PM<br />Game:
+          Fortnite
         </div>
         <div class="schedule-box">
           <strong>Tuesday 11 Nov</strong><br />Day Off
         </div>
         <div class="schedule-box">
-          <strong>Wednesday 12 Nov</strong><br />630PM - 930PM Game: Minecraft
+          <strong>Wednesday 12 Nov</strong><br />6:30PM - 9:30PM<br />Game:
+          Minecraft
         </div>
         <div class="schedule-box">
           <strong>Thursday 13 Nov</strong><br />Day Off
         </div>
         <div class="schedule-box">
-          <strong>Friday 14 Nov</strong><br />5PM - 10PM Game: Viewers Choice
+          <strong>Friday 14 Nov</strong><br />5PM - 10PM<br />Game: Viewers
+          Choice
         </div>
       </div>
     </section>
@@ -264,50 +384,52 @@
       <h2>Social Media Links</h2>
       <p>You can find all of Alfie's Social Medias!</p>
       <div class="socials-container">
-        <a href="https://x.com/Alfredo2881_" target="_blank" class="social-box"
+        <a
+          href="https://x.com/Alfredo2881_"
+          target="_blank"
+          class="social-box twitter"
           ><i class="fab fa-twitter"></i>Twitter/X</a
         >
         <a
           href="https://www.twitch.tv/alfredo2881"
           target="_blank"
-          class="social-box"
+          class="social-box twitch"
           ><i class="fab fa-twitch"></i>Twitch</a
         >
         <a
           href="https://www.tiktok.com/@alfu2010?lang=en-GB"
           target="_blank"
-          class="social-box"
+          class="social-box tiktok"
           ><i class="fab fa-tiktok"></i>TikTok</a
         >
         <a
           href="https://www.youtube.com/@AAlfredo2881"
           target="_blank"
-          class="social-box"
-          ><i class="fab fa-tiktok"></i>YouTube</a
+          class="social-box youtube"
+          ><i class="fab fa-youtube"></i>YouTube</a
         >
         <a
           href="https://kick.com/alfredo2881"
           target="_blank"
-          class="social-box"
-          ><i class="fab fa-tiktok"></i>Kick</a
+          class="social-box kick"
+          ><i class="fas fa-play"></i>Kick</a
         >
       </div>
     </section>
 
     <!-- VODs -->
     <section id="vods" style="background: #222">
-      <h2>VODs & Highlights</h2>
-      <p>This is where you can see all Alfie's Latest Videos!</p>
-      <p>COMING SOON! 1 January 2026</p>
+      <h2>Clips & Highlights</h2>
+      <p>Latest Twitch Community Clips!- !Clips In The Twitch CHAT!</p>
+      <div id="vod-posts" class="community"></div>
     </section>
 
     <!-- Community -->
     <section id="community" style="background: #111">
       <h2 style="text-align: center; margin-bottom: 30px">Community Posts</h2>
       <div class="community" id="community-posts"></div>
-
       <div class="discord-widget">
-        <h2>Join our Communtiy</h2>
+        <h2>Join our Community</h2>
         <iframe
           src="https://discord.com/widget?id=1002961945760112770&theme=dark"
           allowtransparency="true"
@@ -327,6 +449,36 @@
         document.getElementById(id).classList.add("active");
       }
 
+      // --- Firebase Clips ---
+      const firebaseConfig = {
+        apiKey: "AIzaSyDbRqCTusSh-K0quNJgRGuEW7-5L8rveZw",
+        authDomain: "alfredoclipz-e10ab.firebaseapp.com",
+        projectId: "alfredoclipz-e10ab",
+        storageBucket: "alfredoclipz-e10ab.firebasestorage.app",
+        messagingSenderId: "726775632379",
+        appId: "1:726775632379:web:fee1ab9cae6162d50ffb5e",
+        measurementId: "G-F7E9EV68MG",
+      };
+      firebase.initializeApp(firebaseConfig);
+      const db = firebase.firestore();
+
+      async function loadClips() {
+        const container = document.getElementById("vod-posts");
+        const snapshot = await db
+          .collection("clips")
+          .orderBy("created_at", "desc")
+          .get();
+        snapshot.forEach((doc) => {
+          const clip = doc.data();
+          const div = document.createElement("div");
+          div.className = "vod-card";
+          div.innerHTML = `<h3>${clip.title}</h3><iframe src="${clip.url}/embed" allowfullscreen></iframe>`;
+          container.appendChild(div);
+        });
+      }
+      loadClips();
+
+      // --- Community Posts ---
       const posts = [
         {
           title: "Game Of The Week!",
@@ -350,21 +502,12 @@
         },
       ];
 
-      const container = document.getElementById("community-posts");
-
+      const communityContainer = document.getElementById("community-posts");
       posts.forEach((post) => {
         const card = document.createElement("div");
         card.classList.add("post-card");
-
-        const title = document.createElement("h3");
-        title.textContent = post.title;
-        card.appendChild(title);
-
-        const content = document.createElement("p");
-        content.textContent = post.content;
-        card.appendChild(content);
-
-        container.appendChild(card);
+        card.innerHTML = `<h3>${post.title}</h3><p>${post.content}</p>`;
+        communityContainer.appendChild(card);
       });
     </script>
   </body>
