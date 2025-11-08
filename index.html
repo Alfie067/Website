@@ -9,7 +9,6 @@
       crossorigin="anonymous"
     ></script>
     <style>
-      /* Global Styles */
       * {
         margin: 0;
         padding: 0;
@@ -106,7 +105,6 @@
         width: 100%;
       }
 
-      /* Community Section */
       .community {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -132,6 +130,7 @@
         font-size: 20px;
         color: #ccc;
       }
+
       .discord-widget {
         margin-top: 50px;
         text-align: center;
@@ -148,7 +147,6 @@
         max-width: 90%;
       }
 
-      /* Socials Section */
       .socials-container {
         display: flex;
         justify-content: center;
@@ -181,60 +179,31 @@
         border-color: #fff;
       }
 
-      /* VODs Section */
-      .vods-container {
+      .schedule-container {
         display: flex;
         justify-content: center;
         flex-wrap: wrap;
-        gap: 40px;
+        gap: 30px;
         margin-top: 50px;
       }
-      .vod-box {
-        width: 360px;
-        border: 2px solid #fff;
-        border-radius: 20px;
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        transition: transform 0.3s, background 0.3s;
-      }
-      .vod-box:hover {
-        transform: translateY(-10px);
-        border-color: #fff;
-      }
-      .vod-title {
+      .schedule-box {
         background: #111;
-        color: #fff;
-        font-size: 24px;
-        padding: 10px;
+        border: 2px solid #fff;
+        border-radius: 15px;
+        padding: 30px 20px;
+        width: 200px;
         text-align: center;
-        border-bottom: 1px solid #fff;
+        transition: transform 0.3s, box-shadow 0.3s;
+        font-size: 20px;
       }
-      .vod-content {
-        position: relative;
-        padding-top: 177.77%;
-        overflow: hidden;
-      } /* 16:9 */
-      .vod-content iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        border: none;
+      .schedule-box:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 0 20px #fff;
       }
 
-      /* Responsive */
       @media (max-width: 1920px) {
         .community {
           grid-template-columns: repeat(2, 1fr);
-        }
-        .social-box,
-        .vod-box {
-          width: 180px;
-        }
-        .vod-box {
-          height: auto;
         }
       }
       @media (max-width: 1200px) {
@@ -249,24 +218,51 @@
       <h1>Alfredo2881</h1>
       <nav>
         <a onclick="showSection('home')">Home</a>
+        <a onclick="showSection('schedule')">Schedule</a>
         <a onclick="showSection('socials')">Socials</a>
         <a onclick="showSection('vods')">VODs</a>
         <a onclick="showSection('community')">Community</a>
       </nav>
     </header>
 
+    <!-- Home -->
     <section id="home" class="active" style="background: #111">
       <h2>Welcome to Alfredo2881</h2>
       <p>15 Year Old • Twitch Streamer • UK</p>
+      <p>NEW UPDATE 2.0-- NEW SCHEDULE SECTION!</p>
       <a class="cta-button" onclick="showSection('community')"
         >Join the Community</a
       >
     </section>
 
-    <section id="socials" style="background: #222">
+    <!-- Schedule -->
+    <section id="schedule" style="background: #222">
+      <h2>Streaming Schedule</h2>
+      <p>This is Alfie's Stream Schedule For The Week!</p>
+      <p>Week of- 10/11/25 - 16/11/25</p>
+      <div class="schedule-container">
+        <div class="schedule-box">
+          <strong>Monday 10 Nov</strong><br />730PM - 930PM Game: Fortnite
+        </div>
+        <div class="schedule-box">
+          <strong>Tuesday 11 Nov</strong><br />Day Off
+        </div>
+        <div class="schedule-box">
+          <strong>Wednesday 12 Nov</strong><br />630PM - 930PM Game: Minecraft
+        </div>
+        <div class="schedule-box">
+          <strong>Thursday 13 Nov</strong><br />Day Off
+        </div>
+        <div class="schedule-box">
+          <strong>Friday 14 Nov</strong><br />5PM - 10PM Game: Viewers Choice
+        </div>
+      </div>
+    </section>
+
+    <!-- Socials -->
+    <section id="socials" style="background: #111">
       <h2>Social Media Links</h2>
       <p>You can find all of Alfie's Social Medias!</p>
-      <p></p>
       <div class="socials-container">
         <a href="https://x.com/Alfredo2881_" target="_blank" class="social-box"
           ><i class="fab fa-twitter"></i>Twitter/X</a
@@ -283,67 +279,41 @@
           class="social-box"
           ><i class="fab fa-tiktok"></i>TikTok</a
         >
-      </div>
-    </section>
-    <section id="vods" style="background: #111">
-      <h2>VODs & Highlights</h2>
-      <p>This is where you can see all Alfie's Latest Videos!</p>
-      <p>COMING SOON!</p>
-      <p></p>
-      <p></p>
-      <div class="vods-container">
-        <div class="vod-box">
-          <div class="vod-title">Latest Video</div>
-          <div class="vod-content">
-            <iframe
-              src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-              allowfullscreen
-            ></iframe>
-          </div>
-        </div>
-        <div class="vod-box">
-          <div class="vod-title">Latest Video</div>
-          <div class="vod-content">
-            <iframe
-              src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-              allowfullscreen
-            ></iframe>
-          </div>
-        </div>
-        <div class="vod-box">
-          <div class="vod-title">Latest TikTok Video</div>
-          <div class="vod-content">
-            <iframe
-              src="https://www.tiktok.com/embed/7192631083844860422"
-              allowfullscreen
-            ></iframe>
-          </div>
-        </div>
-        <div class="vod-box">
-          <div class="vod-title">Latest TikTok Video</div>
-          <div class="vod-content">
-            <iframe
-              src="https://www.tiktok.com/embed/7192631083844860422"
-              allowfullscreen
-            ></iframe>
-          </div>
-        </div>
+        <a
+          href="https://www.youtube.com/@AAlfredo2881"
+          target="_blank"
+          class="social-box"
+          ><i class="fab fa-tiktok"></i>YouTube</a
+        >
+        <a
+          href="https://kick.com/alfredo2881"
+          target="_blank"
+          class="social-box"
+          ><i class="fab fa-tiktok"></i>Kick</a
+        >
       </div>
     </section>
 
-    <section id="community" style="background: #222">
+    <!-- VODs -->
+    <section id="vods" style="background: #222">
+      <h2>VODs & Highlights</h2>
+      <p>This is where you can see all Alfie's Latest Videos!</p>
+      <p>COMING SOON! 1 January 2026</p>
+    </section>
+
+    <!-- Community -->
+    <section id="community" style="background: #111">
       <h2 style="text-align: center; margin-bottom: 30px">Community Posts</h2>
       <div class="community" id="community-posts"></div>
 
       <div class="discord-widget">
-        <h2>Join our Discord</h2>
+        <h2>Join our Communtiy</h2>
         <iframe
           src="https://discord.com/widget?id=1002961945760112770&theme=dark"
           allowtransparency="true"
           frameborder="0"
           sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
-        >
-        </iframe>
+        ></iframe>
       </div>
     </section>
 
@@ -357,38 +327,26 @@
         document.getElementById(id).classList.add("active");
       }
 
-      // Dynamic community posts with poll
       const posts = [
         {
-          title: "New Game Release!",
-          content:
-            "Check out the latest game we are streaming this week. This weeks game is: FORTNITE",
+          title: "Game Of The Week!",
+          content: "This week's game is: FORTNITE",
         },
         {
           title: "Weekly Highlights",
-          content: "Top clips from our community players this week.",
-        },
-        {
-          title: "(COMING SOON) Tournament Announced",
-          content: "Join our weekend tournament and win prizes!",
-        },
-        {
-          title: "Community Polls",
-          content: "Vote for the next game we'll stream live.",
-          poll: {
-            question: "Which game should we stream next?",
-            options: ["Fortnite", "FiveM", "Minecraft"],
-            votes: [0, 0, 0],
-            storageKey: "community_poll_vote", // localStorage key
-          },
+          content: "Top clips from our community!",
         },
         {
           title: "Streamer Tips",
-          content: "Learn how Alfredo2881 sets up his stream for success.",
+          content: "Learn how Alfredo sets up his stream!",
         },
         {
-          title: "(COMING SOON) Giveaway Time!",
-          content: "Exclusive merch giveaway for our community members.",
+          title: "(COMING SOON) Tournament",
+          content: "Weekend tournament and prizes!",
+        },
+        {
+          title: "(COMING SOON) Giveaway",
+          content: "Exclusive merch giveaway soon!",
         },
       ];
 
@@ -398,98 +356,16 @@
         const card = document.createElement("div");
         card.classList.add("post-card");
 
-        // Title
         const title = document.createElement("h3");
         title.textContent = post.title;
         card.appendChild(title);
 
-        // Content
         const content = document.createElement("p");
         content.textContent = post.content;
         card.appendChild(content);
 
-        // Poll
-        if (post.poll) {
-          const pollDiv = document.createElement("div");
-          pollDiv.style.marginTop = "15px";
-
-          const question = document.createElement("p");
-          question.textContent = post.poll.question;
-          question.style.fontWeight = "bold";
-          pollDiv.appendChild(question);
-
-          const resultsDiv = document.createElement("div");
-          resultsDiv.classList.add("poll-results");
-          resultsDiv.style.marginTop = "10px";
-          pollDiv.appendChild(resultsDiv);
-
-          // Check if user already voted
-          const savedVote = localStorage.getItem(post.poll.storageKey);
-
-          post.poll.options.forEach((option, i) => {
-            const btn = document.createElement("button");
-            btn.textContent = option;
-            btn.style.marginRight = "10px";
-            btn.style.marginTop = "5px";
-            btn.style.padding = "8px 12px";
-            btn.style.border = "1px solid #fff";
-            btn.style.background = "#111";
-            btn.style.color = "#fff";
-            btn.style.cursor = "pointer";
-            btn.style.borderRadius = "5px";
-
-            // Disable button if already voted
-            if (savedVote !== null) {
-              btn.disabled = true;
-              btn.style.opacity = "0.5";
-              btn.style.cursor = "default";
-            }
-
-            btn.addEventListener("click", () => {
-              if (localStorage.getItem(post.poll.storageKey) === null) {
-                post.poll.votes[i]++;
-                localStorage.setItem(post.poll.storageKey, i); // save vote
-                updatePollResults(resultsDiv, post.poll);
-                // Disable all buttons
-                pollDiv.querySelectorAll("button").forEach((b) => {
-                  b.disabled = true;
-                  b.style.opacity = "0.5";
-                  b.style.cursor = "default";
-                });
-              }
-            });
-
-            pollDiv.appendChild(btn);
-          });
-
-          // Show results if user already voted
-          if (savedVote !== null) {
-            // Add the saved vote to the poll counts for display
-            const voteIndex = parseInt(savedVote, 10);
-            post.poll.votes[voteIndex]++;
-            updatePollResults(resultsDiv, post.poll);
-          }
-
-          card.appendChild(pollDiv);
-        }
-
         container.appendChild(card);
       });
-
-      // Function to update poll results
-      function updatePollResults(resultsDiv, poll) {
-        resultsDiv.innerHTML = "";
-        const totalVotes = poll.votes.reduce((a, b) => a + b, 0);
-        poll.options.forEach((option, i) => {
-          const percent =
-            totalVotes === 0
-              ? 0
-              : Math.round((poll.votes[i] / totalVotes) * 100);
-          const resultLine = document.createElement("p");
-          resultLine.textContent = `${option}: ${poll.votes[i]} vote(s) (${percent}%)`;
-          resultsDiv.appendChild(resultLine);
-        });
-      }
     </script>
   </body>
 </html>
