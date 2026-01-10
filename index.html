@@ -2,8 +2,9 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=1920, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>The Chill Zone - Alfredo2881</title>
+
     <script
       src="https://kit.fontawesome.com/a076d05399.js"
       crossorigin="anonymous"
@@ -15,18 +16,19 @@
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-analytics-compat.js"></script>
 
     <style>
-      /* --- BASIC STYLES --- */
       * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
         font-family: "Roboto", sans-serif;
       }
+
       body {
-        background: #000;
-        color: #fff;
+        background: #554646;
+        color: #ffffff;
         overflow: hidden;
       }
+
       header {
         position: fixed;
         top: 0;
@@ -36,84 +38,99 @@
         align-items: center;
         padding: 20px 50px;
         background: rgba(255, 255, 255, 0.1);
-        border-bottom: 1px solid #fff;
+        border-bottom: 1px solid #19a2c8;
         z-index: 100;
       }
+
       header h1 {
         font-size: 48px;
-        color: #fff;
       }
+
       nav a {
         margin-left: 40px;
         text-decoration: none;
-        color: #fff;
+        color: #098a93;
         font-size: 24px;
         position: relative;
-        transition: 0.3s;
         cursor: pointer;
       }
+
       nav a::after {
         content: "";
-        display: block;
-        height: 2px;
+        position: absolute;
+        left: 0;
+        bottom: -5px;
         width: 0;
+        height: 2px;
         background: #fff;
         transition: 0.3s;
-        position: absolute;
-        bottom: -5px;
-        left: 0;
       }
-      nav a:hover::after {
+
+      nav a:hover::after,
+      nav a.active::after {
         width: 100%;
       }
 
-      /* --- SECTIONS CENTERED --- */
+      nav a.active {
+        color: #0aecbf;
+      }
+
+      /* --- SECTIONS --- */
       section {
         width: 100vw;
         height: 100vh;
-        display: none;
-        justify-content: center; /* horizontal centering */
-        align-items: center; /* vertical centering */
-        text-align: center; /* text centered */
-        flex-direction: column;
-        padding: 150px 100px 100px 100px;
-        overflow-y: auto;
-      }
-      section.active {
+        position: absolute;
+        top: 0;
+        left: 0;
+
         display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+
+        padding: 150px 100px 100px;
+        overflow-y: auto;
+
+        opacity: 0;
+        transform: translateX(60px);
+        pointer-events: none;
+        transition: opacity 0.5s ease, transform 0.5s ease;
+      }
+
+      section.active {
+        opacity: 1;
+        transform: translateX(0);
+        pointer-events: auto;
       }
 
       h2 {
         font-size: 60px;
         margin-bottom: 20px;
       }
+
       p {
         font-size: 24px;
         margin-bottom: 30px;
       }
+
       .cta-button {
         padding: 20px 50px;
         font-size: 28px;
+        background: #08b4ce;
         color: #000;
-        background: #fff;
-        border: none;
         border-radius: 10px;
         cursor: pointer;
         text-decoration: none;
-        transition: 0.3s;
       }
-      .cta-button:hover {
-        background: #222;
-        color: #fff;
-      }
+
       footer {
-        padding: 20px 50px;
-        text-align: center;
-        background: rgba(255, 255, 255, 0.1);
-        font-size: 20px;
         position: absolute;
         bottom: 0;
         width: 100%;
+        padding: 20px;
+        text-align: center;
+        background: rgba(255, 255, 255, 0.1);
       }
 
       /* --- COMMUNITY --- */
@@ -123,54 +140,22 @@
         gap: 30px;
         width: 100%;
       }
+
       .post-card,
       .vod-card {
         background: #111;
         border: 1px solid #fff;
         border-radius: 15px;
         padding: 20px;
-        transition: transform 0.3s, box-shadow 0.3s;
-        text-align: center;
       }
-      .post-card:hover,
-      .vod-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 0 20px #fff;
-      }
-      .post-card h3,
-      .vod-card h3 {
-        font-size: 28px;
-        margin-bottom: 10px;
-      }
-      .post-card p {
-        font-size: 20px;
-        color: #ccc;
-      }
+
       .vod-card iframe {
-        border-radius: 10px;
-        border: 1px solid #fff;
         width: 100%;
-        max-width: 480px;
         height: 270px;
+        border-radius: 10px;
       }
 
-      .discord-widget {
-        margin-top: 50px;
-        text-align: center;
-      }
-      .discord-widget h2 {
-        font-size: 32px;
-        margin-bottom: 20px;
-      }
-      .discord-widget iframe {
-        border-radius: 15px;
-        border: 1px solid #fff;
-        width: 600px;
-        height: 700px;
-        max-width: 90%;
-      }
-
-      /* --- SOCIAL BOXES --- */
+      /* --- SOCIALS --- */
       .socials-container {
         display: flex;
         justify-content: center;
@@ -178,157 +163,110 @@
         gap: 40px;
         margin-top: 50px;
       }
+
       .social-box {
+        width: 200px;
+        height: 200px;
+        border: 2px solid #ff0000;
+        border-radius: 20px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        width: 200px;
-        height: 200px;
-        border: 2px solid #fff;
-        border-radius: 20px;
-        transition: transform 0.3s, background 0.3s, border-color 0.3s,
-          box-shadow 0.3s;
-        cursor: pointer;
         text-decoration: none;
-        color: #fff;
         font-size: 24px;
-      }
-      .social-box i {
-        font-size: 48px;
-        margin-bottom: 15px;
-      }
-      .social-box.twitter {
-        border-color: #1da1f2;
-        color: #1da1f2;
-      }
-      .social-box.twitter:hover {
-        background: #1da1f2;
-        color: #fff;
-        box-shadow: 0 0 20px #1da1f2;
-      }
-      .social-box.twitch {
-        border-color: #9146ff;
-        color: #9146ff;
-      }
-      .social-box.twitch:hover {
-        background: #9146ff;
-        color: #fff;
-        box-shadow: 0 0 20px #9146ff;
-      }
-      .social-box.tiktok {
-        border-color: #ff0050;
-        color: #ff0050;
-      }
-      .social-box.tiktok:hover {
-        background: #ff0050;
-        color: #fff;
-        box-shadow: 0 0 20px #ff0050;
-      }
-      .social-box.youtube {
-        border-color: #ff0000;
-        color: #ff0000;
-      }
-      .social-box.youtube:hover {
-        background: #ff0000;
-        color: #fff;
-        box-shadow: 0 0 20px #ff0000;
-      }
-      .social-box.kick {
-        border-color: #53fc18;
-        color: #53fc18;
-      }
-      .social-box.kick:hover {
-        background: #53fc18;
-        color: #000;
-        box-shadow: 0 0 20px #53fc18;
+        color: #0008ff;
       }
 
       /* --- SCHEDULE --- */
       .schedule-container {
         display: flex;
-        justify-content: center;
         flex-wrap: wrap;
         gap: 40px;
+        justify-content: center;
         margin-top: 50px;
       }
+
       .schedule-box {
-        background: #111;
-        border: 3px solid #fff;
-        border-radius: 20px;
-        padding: 40px 30px;
         width: 260px;
         height: 220px;
-        text-align: center;
-        transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+        padding: 40px 30px;
+        border: 3px solid #fff;
+        border-radius: 20px;
+        background: #111;
         font-size: 22px;
         font-weight: bold;
       }
-      .schedule-box:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 0 25px #fff;
-      }
-      .schedule-box:nth-child(1) {
-        border-color: #ff0000;
-        color: #ff0000;
-      }
-      .schedule-box:nth-child(1):hover {
-        background: #ff0000;
-        color: #fff;
-        box-shadow: 0 0 25px #ff0000;
-      }
-      .schedule-box:nth-child(2) {
-        border-color: #ff7f00;
-        color: #ff7f00;
-      }
-      .schedule-box:nth-child(2):hover {
-        background: #ff7f00;
-        color: #fff;
-        box-shadow: 0 0 25px #ff7f00;
-      }
-      .schedule-box:nth-child(3) {
-        border-color: #ffff00;
-        color: #ffff00;
-      }
-      .schedule-box:nth-child(3):hover {
-        background: #ffff00;
-        color: #000;
-        box-shadow: 0 0 25px #ffff00;
-      }
-      .schedule-box:nth-child(4) {
-        border-color: #00ff00;
-        color: #00ff00;
-      }
-      .schedule-box:nth-child(4):hover {
-        background: #00ff00;
-        color: #000;
-        box-shadow: 0 0 25px #00ff00;
-      }
-      .schedule-box:nth-child(5) {
-        border-color: #0000ff;
-        color: #0000ff;
-      }
-      .schedule-box:nth-child(5):hover {
-        background: #0000ff;
-        color: #fff;
-        box-shadow: 0 0 25px #0000ff;
+
+      .discord-widget iframe {
+        width: 600px;
+        height: 700px;
+        max-width: 100%;
+        border-radius: 15px;
+        border: 1px solid #fff;
       }
 
-      @media (max-width: 1920px) {
-        .community {
-          grid-template-columns: repeat(2, 1fr);
-        }
+      /* ===== MOBILE NAV OVERLAY ===== */
+      .mobile-nav-toggle {
+        display: none;
+        font-size: 28px;
+        cursor: pointer;
       }
-      @media (max-width: 1200px) {
-        .community {
-          grid-template-columns: 1fr;
+
+      .mobile-nav {
+        position: fixed;
+        inset: 0;
+        background: #000;
+        z-index: 999;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(30px);
+        transition: opacity 0.4s ease, transform 0.4s ease;
+      }
+
+      .mobile-nav.active {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+      }
+
+      .mobile-nav a {
+        font-size: 32px;
+        margin: 20px 0;
+        color: #fff;
+        text-decoration: none;
+      }
+
+      .mobile-close {
+        position: absolute;
+        top: 30px;
+        right: 30px;
+        font-size: 36px;
+        cursor: pointer;
+      }
+
+      /* SHOW ONLY ON MOBILE */
+      @media (max-width: 768px) {
+        nav {
+          display: none;
+        }
+
+        .mobile-nav-toggle {
+          display: block;
         }
       }
     </style>
   </head>
+
   <body>
     <header>
       <h1>Alfredo2881</h1>
+
       <nav>
         <a onclick="showSection('home')">Home</a>
         <a onclick="showSection('schedule')">Schedule</a>
@@ -336,15 +274,25 @@
         <a onclick="showSection('vods')">Clips & VODs</a>
         <a onclick="showSection('community')">Community</a>
       </nav>
+      <div id="mobileNav" class="mobile-nav">
+        <div class="mobile-close" onclick="toggleMobileNav()">✕</div>
+
+        <a onclick="mobileNavigate('home')">Home</a>
+        <a onclick="mobileNavigate('schedule')">Schedule</a>
+        <a onclick="mobileNavigate('socials')">Socials</a>
+        <a onclick="mobileNavigate('vods')">Clips & VODs</a>
+        <a onclick="mobileNavigate('community')">Community</a>
+      </div>
+
+      <div class="mobile-nav-toggle" onclick="toggleMobileNav()">☰</div>
     </header>
 
-    <!-- Home -->
+    <!-- HOME -->
     <section id="home" class="active" style="background: #111">
       <h2>Welcome to The Chill Zone!</h2>
-      <p>16 Year Old • Twitch Streamer • UK • Interative</p>
-      <p>
+      <p>• Update 2.8 • 16 Year Old • Twitch Streamer • UK • Interactive</p>
       <a class="cta-button" onclick="showSection('community')"
-        >Feel Free To Join The Community!</a
+        >Join The Community</a
       >
     </section>
 
@@ -355,22 +303,20 @@
       <p>Week of- 5/1/26 - 11/1/26</p>
       <div class="schedule-container">
         <div class="schedule-box">
-          <strong>Monday 5th Jan</strong><br />10:00am - 15:00pm<br />Game:
-          GTA V
+          <strong>Monday 5th Jan</strong><br />10:00am-15:00pm<br />Game: GTA V
         </div>
         <div class="schedule-box">
           <strong>Tuesday 6th Jan</strong><br />Day Off CADETS
         </div>
         <div class="schedule-box">
-          <strong>Wednesday 7th Jan</strong><br />5:30pm - 8:30pm<br />Game: 
+          <strong>Wednesday 7th Jan</strong><br />5:30pm-8:30pm<br />Game:
           Minecraft
         </div>
         <div class="schedule-box">
           <strong>Thursday 8th Jan</strong><br />Day Off CADETS
         </div>
         <div class="schedule-box">
-          <strong>Friday 9th Jan</strong><br />5:30pm - 9:30pm<br />Game: 
-          Fortnite
+          <strong>Friday 9th Jan</strong><br />5:30pm-9:30pm<br />Game: Fortnite
         </div>
       </div>
     </section>
@@ -435,7 +381,7 @@
       </div>
     </section>
 
-    <footer>&copy; 2025 The Chill Zone - Alfredo2881 | All Rights Reserved</footer>
+    <footer>Made In 2025 The Chill Zone - Alfredo2881</footer>
 
     <script>
       function showSection(id) {
@@ -501,6 +447,16 @@
         card.innerHTML = `<h3>${post.title}</h3><p>${post.content}</p>`;
         communityContainer.appendChild(card);
       });
+
+      function toggleMobileNav() {
+        document.getElementById("mobileNav").classList.toggle("active");
+      }
+
+      function mobileNavigate(section) {
+        toggleMobileNav();
+        showSection(section);
+      }
     </script>
   </body>
 </html>
+
